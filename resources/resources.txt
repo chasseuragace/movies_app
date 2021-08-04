@@ -1,0 +1,8 @@
+font explorer
+https://fonts.google.com/?preview.text_type=custom&category=Serif&query=mont
+
+layout reference
+https://www.behance.net/gallery/80430137/Filmweb-Movies-TV-Series-app
+
+api reference
+https://www.themoviedb.org/

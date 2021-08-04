@@ -26,10 +26,10 @@ extension p on TextStyle {
     return this.copyWith(fontSize: size);
   }
 
-  TextStyle withWeight(int size) {
+  TextStyle withWeight(int weight) {
 // todo size can be form 1 to 9,
-// use switch case to select appropriate fontsize wrt size paramater
-    switch (size) {
+// use switch case to select appropriate fontweight wrt weight paramater
+    switch (weight) {
       case 1:
         return this.copyWith(fontWeight: FontWeight.w100);
       // todo define  for others
