@@ -3,8 +3,36 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppThemeConstants {
-  static TextStyle appFont = GoogleFonts.montserrat();
-  static final appTheme = ThemeData(
-    accentColor: Colors.orange,
-  );
+  static bool themeModeIsDark = false;
+
+  static TextStyle appFontDark =
+      GoogleFonts.montserrat().copyWith(color: Colors.black);
+  static TextStyle appFontAccent =
+      GoogleFonts.montserrat().copyWith(color: Colors.black);
+  static TextStyle appFontWhite =
+      GoogleFonts.montserrat().copyWith(color: Colors.white);
+
+  static get appTheme => themeModeIsDark
+      ? ThemeData(
+          accentColor: Colors.orange,
+        )
+      : ThemeData(
+          accentColor: Colors.orange,
+        );
+}
+
+extension p on TextStyle {
+  TextStyle withSize(double size) {
+    return this.copyWith(fontSize: size);
+  }
+
+  TextStyle withWeight(int size) {
+// todo size can be form 1 to 9,
+// use switch case to select appropriate fontsize wrt size paramater
+    switch (size) {
+      case 1:
+        return this.copyWith(fontWeight: FontWeight.w100);
+      // todo define  for others
+    }
+  }
 }
