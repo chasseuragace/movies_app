@@ -17,24 +17,6 @@ class SectionHeaderWithAction extends StatelessWidget {
       children: [
         Text(heading,
             style: AppThemeConstants.appFontWhite.withSize(18).withWeight(1)),
-        // if (false)
-        //   TextButton(
-        //     //todo theme for button - splash effect ko lagi
-        //     onPressed: () {},
-        //     child: Row(
-        //       children: [
-        //         Padding(
-        //           padding: const EdgeInsets.only(right: 4.0),
-        //           child: Text(
-        //             "See All",
-        //             style: AppThemeConstants.appFont
-        //                 .copyWith(color: Theme.of(context).accentColor),
-        //           ),
-        //         ),
-        //         Icon(Icons.arrow_forward),
-        //       ],
-        //     ),
-        //   ),
         Ink(
           child: InkWell(
             splashColor: Colors.orange,

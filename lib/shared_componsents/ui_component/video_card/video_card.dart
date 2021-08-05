@@ -21,9 +21,14 @@ class VideoCard extends StatelessWidget {
         ),
         //todo define text style for title and subtitie
         Text(
-          "title",
+          "The title text",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+          ),
         ),
-        Text("subtitie")
+        Text("the subtitle section",
+            style: TextStyle(color: Colors.grey[700], fontSize: 15))
       ],
     );
   }
