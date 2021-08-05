@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/features/homepage/ui/bottom_body.dart';
-import 'package:movies_app/features/homepage/ui/top_scroller.dart';
+import 'package:movies_app/features/homepage/ui/component/bottom_body.dart';
+import 'package:movies_app/features/homepage/ui/component/top_scroller.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);

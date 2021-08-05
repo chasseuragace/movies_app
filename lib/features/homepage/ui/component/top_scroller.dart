@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/features/homepage/ui/video_carousel.dart';
+import 'package:movies_app/shared_componsents/ui_component/video_carousel.dart';
 import 'package:movies_app/shared_componsents/ui_component/logo.dart';
 import 'package:movies_app/shared_componsents/section_header_with_action.dart';
 

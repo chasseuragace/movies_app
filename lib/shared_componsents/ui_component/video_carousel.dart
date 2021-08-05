@@ -18,7 +18,7 @@ class VideoCarousel extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: VideoCard(
+              child: true ?VideoCard2( singleCard: VideoCardModel(),):VideoCard(
                 singleCard: VideoCardModel(),
               ),
             );

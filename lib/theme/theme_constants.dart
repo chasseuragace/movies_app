@@ -3,22 +3,28 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppThemeConstants {
-  static bool themeModeIsDark = false;
+  static bool themeModeIsDark = true;
 
   static TextStyle appFontDark =
       GoogleFonts.montserrat().copyWith(color: Colors.black);
   static TextStyle appFontAccent =
-      GoogleFonts.montserrat().copyWith(color: Colors.black);
+      GoogleFonts.montserrat().copyWith(color: Colors.orange);
   static TextStyle appFontWhite =
       GoogleFonts.montserrat().copyWith(color: Colors.white);
 
-  static get appTheme => themeModeIsDark
-      ? ThemeData(
-          accentColor: Colors.orange,
-        )
-      : ThemeData(
-          accentColor: Colors.orange,
-        );
+  static TextStyle get appFont => themeModeIsDark ? appFontWhite : appFontDark;
+
+  static get appTheme {
+    return themeModeIsDark
+        ? ThemeData(
+            brightness: Brightness.dark,
+            fontFamily: GoogleFonts.montserrat().fontFamily,
+            accentColor: Colors.orange)
+        : ThemeData(
+            brightness: Brightness.light,
+            fontFamily: GoogleFonts.montserrat().fontFamily,
+            accentColor: Colors.orange);
+  }
 }
 
 extension p on TextStyle {
@@ -26,9 +32,12 @@ extension p on TextStyle {
     return this.copyWith(fontSize: size);
   }
 
-  TextStyle withWeight(int weight) {
+  TextStyle withWeight({int weight}) {
 // todo size can be form 1 to 9,
 // use switch case to select appropriate fontweight wrt weight paramater
+    if ((weight ?? 10) > 10 || (weight ?? -1) <= 0) {
+      return this.copyWith(fontWeight: FontWeight.bold);
+    }
     switch (weight) {
       case 1:
         return this.copyWith(fontWeight: FontWeight.w100);
@@ -50,7 +59,7 @@ extension p on TextStyle {
         return this.copyWith(fontWeight: FontWeight.w900);
       default:
         return this.copyWith(fontWeight: FontWeight.w400);
-      // todo define  for others
     }
   }
 }
+
