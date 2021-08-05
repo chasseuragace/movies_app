@@ -16,7 +16,11 @@ class SectionHeaderWithAction extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(heading,
-            style: AppThemeConstants.appFontWhite.withSize(18).withWeight(1)),
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1
+                .withSize(18)
+                .withWeight(null)),
         // if (false)
         //   TextButton(
         //     //todo theme for button - splash effect ko lagi
@@ -35,29 +39,48 @@ class SectionHeaderWithAction extends StatelessWidget {
         //       ],
         //     ),
         //   ),
-        Ink(
-          child: InkWell(
-            splashColor: Colors.orange,
-            onTap: action,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 4.0),
-                    child:
-                        Text("See all", style: AppThemeConstants.appFontAccent),
-                  ),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 12,
-                    color: Theme.of(context).accentColor,
-                  ),
-                ],
+
+        TextButton(
+          onPressed: () {},
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 4.0),
+                child: Text("See all", style: AppThemeConstants.appFontAccent),
+              ),
+              Icon(
+                Icons.arrow_forward_ios,
+                size: 12,
+                color: Theme.of(context).accentColor,
+              ),
+            ],
+          ),
+        ),
+        if (false)
+          Ink(
+            child: InkWell(
+              splashColor: Colors.orange,
+              onTap: action,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                // todo refractor make a button out of it
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(right: 4.0),
+                      child: Text("See all",
+                          style: AppThemeConstants.appFontAccent),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      size: 12,
+                      color: Theme.of(context).accentColor,
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        )
+          )
       ],
     );
   }
