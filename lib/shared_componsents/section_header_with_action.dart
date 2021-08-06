@@ -21,25 +21,6 @@ class SectionHeaderWithAction extends StatelessWidget {
                 .bodyText1
                 .withSize(18)
                 .withWeight()),
-        // if (false)
-        //   TextButton(
-        //     //todo theme for button - splash effect ko lagi
-        //     onPressed: () {},
-        //     child: Row(
-        //       children: [
-        //         Padding(
-        //           padding: const EdgeInsets.only(right: 4.0),
-        //           child: Text(
-        //             "See All",
-        //             style: AppThemeConstants.appFont
-        //                 .copyWith(color: Theme.of(context).accentColor),
-        //           ),
-        //         ),
-        //         Icon(Icons.arrow_forward),
-        //       ],
-        //     ),
-        //   ),
-
         TextButton(
           onPressed: () {},
           child: Row(
@@ -82,6 +63,68 @@ class SectionHeaderWithAction extends StatelessWidget {
             ),
           )
       ],
+    );
+  }
+}
+
+class SectionHeaderWithTabs extends StatelessWidget {
+  final Null Function() action;
+  final String heading;
+  const SectionHeaderWithTabs({
+    Key key,
+    this.action,
+    this.heading,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 2,
+      child: SizedBox(
+        height: 500,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Text(heading,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .withSize(18)
+                          .withWeight()),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width * .5,
+                  child: TabBar(tabs: [
+                    Tab(
+                      text: 'Movies',
+                    ),
+                    Tab(text: 'Tv-Show'),
+                  ]),
+                )
+              ],
+            ),
+            Expanded(
+              child: TabBarView(children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.red,
+                ),
+                Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.blue,
+                )
+              ]),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

@@ -9,60 +9,55 @@ class BottomBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: DraggableScrollableSheet(
-        initialChildSize: 1,
-        builder: (_, ScrollController controller) {
-          return SingleChildScrollView(
-            controller: controller,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: SectionHeaderWithAction(
-                      heading: 'Hot News', action: () {}),
-                ),
-                Container(
-                  height: 400,
-                  width: MediaQuery.of(context).size.width,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      Container(
-                        width: 508,
-                        child: Row(
-                          children: [
-                            NewsCard(),
-                            Expanded(
-                              child: Column(
-                                children: [NewsCard(), NewsCard()],
-                              ),
-                            )
-                          ],
-                        ),
+    var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: SectionHeaderWithAction(heading: 'Hot News', action: () {}),
+        ),
+        Container(
+          height: isPortrait ? 400 : 300,
+          width: MediaQuery.of(context).size.width,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              Container(
+                width: 508,
+                child: Row(
+                  children: [
+                    NewsCard(),
+                    Expanded(
+                      child: Column(
+                        children: [NewsCard(), NewsCard()],
                       ),
-                      //todo refactor
-                      Container(
-                        width: 488,
-                        child: Row(
-                          children: [
-                            NewsCard(),
-                            Expanded(
-                              child: Column(
-                                children: [NewsCard(), NewsCard()],
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
-              ],
-            ),
-          );
-        },
-      ),
+              ),
+              //todo refactor
+              Container(
+                width: 488,
+                child: Row(
+                  children: [
+                    NewsCard(),
+                    Expanded(
+                      child: Column(
+                        children: [NewsCard(), NewsCard()],
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: SectionHeaderWithTabs(heading: 'Popular Today', action: () {}),
+        ),
+      ],
     );
   }
 }
