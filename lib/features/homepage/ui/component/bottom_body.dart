@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/features/homepage/ui/component/news_card.dart';
+import 'package:movies_app/shared_componsents/section_header_with_action.dart';
 
 class BottomBody extends StatelessWidget {
   const BottomBody({
@@ -15,13 +17,46 @@ class BottomBody extends StatelessWidget {
             controller: controller,
             child: Column(
               children: [
-                Container(
-                  height: 700,
-                  color: Colors.green,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: SectionHeaderWithAction(
+                      heading: 'Hot News', action: () {}),
                 ),
                 Container(
-                  height: 700,
-                  color: Colors.red,
+                  height: 400,
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      Container(
+                        width: 508,
+                        child: Row(
+                          children: [
+                            NewsCard(),
+                            Expanded(
+                              child: Column(
+                                children: [NewsCard(), NewsCard()],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      //todo refactor
+                      Container(
+                        width: 488,
+                        child: Row(
+                          children: [
+                            NewsCard(),
+                            Expanded(
+                              child: Column(
+                                children: [NewsCard(), NewsCard()],
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ],
             ),
