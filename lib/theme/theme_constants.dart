@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppThemeConstants {
-  static bool themeModeIsDark = true;
+  static bool themeModeIsDark = false;
 
   static TextStyle appFontDark =
       GoogleFonts.montserrat().copyWith(color: Colors.black);
@@ -33,8 +33,6 @@ extension p on TextStyle {
   }
 
   TextStyle withWeight({int weight}) {
-// todo size can be form 1 to 9,
-// use switch case to select appropriate fontweight wrt weight paramater
     if ((weight ?? 10) > 10 || (weight ?? -1) <= 0) {
       return this.copyWith(fontWeight: FontWeight.bold);
     }
@@ -62,4 +60,3 @@ extension p on TextStyle {
     }
   }
 }
-

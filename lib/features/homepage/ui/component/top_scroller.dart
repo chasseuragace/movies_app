@@ -3,7 +3,6 @@ import 'package:movies_app/shared_componsents/ui_component/video_carousel.dart';
 import 'package:movies_app/shared_componsents/ui_component/logo.dart';
 import 'package:movies_app/shared_componsents/section_header_with_action.dart';
 
-
 class TopScroller extends StatelessWidget {
   const TopScroller({
     Key key,
@@ -37,4 +36,3 @@ class TopScroller extends StatelessWidget {
     );
   }
 }
-

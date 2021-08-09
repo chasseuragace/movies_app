@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/features/homepage/ui/component/bottom_body.dart';
-import 'package:movies_app/features/homepage/ui/component/news_card.dart';
 import 'package:movies_app/features/homepage/ui/component/top_scroller.dart';
 
 class HomePage extends StatelessWidget {
@@ -17,6 +16,7 @@ class HomePage extends StatelessWidget {
   }
 
   double heightPercentFinder(BuildContext context) {
+    //ques
     return (320 + 20) / (MediaQuery.of(context).size.height - kToolbarHeight);
   }
 
@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
                 : .1, //(1 - heightPercentFinder(context)) * .97,
             maxChildSize: 1, //heightPercentFinder(context) * 1.3,
             initialChildSize:
-                isPortrait ? .5 : .15, //1 - heightPercentFinder(context),
+                isPortrait ? .63 : .15, //1 - heightPercentFinder(context),
             builder: (_, controller) {
               return SizedBox(
                 height: _size.height,
