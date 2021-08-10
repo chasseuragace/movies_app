@@ -99,12 +99,14 @@ class SectionHeaderWithTabs extends StatelessWidget {
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width * .5,
-                  child: TabBar(tabs: [
-                    Tab(
-                      text: 'Movies',
-                    ),
-                    Tab(text: 'Tv-Show'),
-                  ]),
+                  child: TabBar(
+                    tabs: [
+                      Tab(
+                        text: 'Movies',
+                      ),
+                      Tab(text: 'Tv-Show'),
+                    ],
+                  ),
                 )
               ],
             ),

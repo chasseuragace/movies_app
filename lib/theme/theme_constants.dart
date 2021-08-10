@@ -17,10 +17,12 @@ class AppThemeConstants {
   static get appTheme {
     return themeModeIsDark
         ? ThemeData(
+            tabBarTheme: TabBarTheme(labelColor: Colors.white),
             brightness: Brightness.dark,
             fontFamily: GoogleFonts.montserrat().fontFamily,
             accentColor: Colors.orange)
         : ThemeData(
+            tabBarTheme: TabBarTheme(labelColor: Colors.black),
             brightness: Brightness.light,
             fontFamily: GoogleFonts.montserrat().fontFamily,
             accentColor: Colors.orange);
