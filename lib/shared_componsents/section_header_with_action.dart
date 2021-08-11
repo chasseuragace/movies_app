@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/features/homepage/ui/component/popular_listview.dart';
 import 'package:movies_app/theme/theme_constants.dart';
 
 class SectionHeaderWithAction extends StatelessWidget {
@@ -81,7 +82,7 @@ class SectionHeaderWithTabs extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: SizedBox(
-        height: 500,
+        height: 350,
         child: Column(
           children: [
             Row(
@@ -112,16 +113,8 @@ class SectionHeaderWithTabs extends StatelessWidget {
             ),
             Expanded(
               child: TabBarView(children: [
-                Container(
-                  height: 100,
-                  width: 100,
-                  color: Colors.red,
-                ),
-                Container(
-                  height: 100,
-                  width: 100,
-                  color: Colors.blue,
-                )
+                PopularTodayTabView(),
+                PopularTodayTabView(),
               ]),
             )
           ],

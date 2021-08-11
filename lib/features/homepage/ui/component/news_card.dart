@@ -38,6 +38,7 @@ class NewsCard extends StatelessWidget {
               Positioned(
                 child: Text(
                   'content content content dsfd dsfdsfd dsfdsf fsdfds dsfdsf dsfdf fsdfdf sdfdf fdsdf ',
+                  style: TextStyle(color: Colors.white),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 3,
                 ),
@@ -46,7 +47,13 @@ class NewsCard extends StatelessWidget {
                 width: 200,
                 height: 50,
               ),
-              Positioned(child: Text('1hr ago'), bottom: 10, left: 10)
+              Positioned(
+                  child: Text(
+                    '1hr ago',
+                    style: TextStyle(color: Colors.white54),
+                  ),
+                  bottom: 10,
+                  left: 10)
             ],
           ),
         ),
