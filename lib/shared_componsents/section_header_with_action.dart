@@ -30,11 +30,8 @@ class SectionHeaderWithAction extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 4.0),
                 child: Text("See all", style: AppThemeConstants.appFontAccent),
               ),
-              Icon(
-                Icons.arrow_forward_ios,
-                size: 12,
-                color: Theme.of(context).accentColor,
-              ),
+              Icon(Icons.arrow_forward_ios,
+                  size: 12, color: Theme.of(context).colorScheme.primary),
             ],
           ),
         ),
@@ -56,7 +53,7 @@ class SectionHeaderWithAction extends StatelessWidget {
                     Icon(
                       Icons.arrow_forward_ios,
                       size: 12,
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ],
                 ),

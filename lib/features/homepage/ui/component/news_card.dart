@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/service/api/api_provider.dart';
 
 class NewsCard extends StatelessWidget {
+  final Results currentData;
+  NewsCard(this.currentData);
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -37,7 +41,10 @@ class NewsCard extends StatelessWidget {
                   )),
               Positioned(
                 child: Text(
-                  'content content content dsfd dsfdsfd dsfdsf fsdfds dsfdsf dsfdf fsdfdf sdfdf fdsdf ',
+                  currentData.originalName ??
+                      currentData.name ??
+                      currentData.originalTitle ??
+                      "NO NAME",
                   style: TextStyle(color: Colors.white),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 3,

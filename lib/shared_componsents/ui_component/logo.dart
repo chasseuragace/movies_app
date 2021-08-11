@@ -12,9 +12,7 @@ class Logo extends StatelessWidget {
       width: 180,
       height: 40,
       child: GestureDetector(
-        onTap: () {
-          ApiProvider().getRequest(url: 'https://dfdsfdfdfdsf.com');
-        },
+        onTap: () {},
         child: Image.network(
             "https://png.pngitem.com/pimgs/s/8-81060_movie-lovers-movie-lovers-logo-hd-png-download.png"),
       ),

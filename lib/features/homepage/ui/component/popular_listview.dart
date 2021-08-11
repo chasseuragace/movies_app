@@ -7,6 +7,7 @@ class PopularTodayTabView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //todo wrap with ValuListenabeBuilder
     return Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20), color: Colors.black),

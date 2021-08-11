@@ -20,12 +20,14 @@ class AppThemeConstants {
             tabBarTheme: TabBarTheme(labelColor: Colors.white),
             brightness: Brightness.dark,
             fontFamily: GoogleFonts.montserrat().fontFamily,
-            accentColor: Colors.orange)
+            colorScheme:
+                ThemeData.dark().colorScheme.copyWith(primary: Colors.orange))
         : ThemeData(
             tabBarTheme: TabBarTheme(labelColor: Colors.black),
             brightness: Brightness.light,
             fontFamily: GoogleFonts.montserrat().fontFamily,
-            accentColor: Colors.orange);
+            colorScheme:
+                ThemeData.dark().colorScheme.copyWith(primary: Colors.orange));
   }
 }
 
