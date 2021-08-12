@@ -18,13 +18,13 @@ class AppThemeConstants {
     return themeModeIsDark
         ? ThemeData(
             tabBarTheme: TabBarTheme(labelColor: Colors.white),
-            brightness: Brightness.dark,
+            // brightness: Brightness.dark,
             fontFamily: GoogleFonts.montserrat().fontFamily,
             colorScheme:
-                ThemeData.dark().colorScheme.copyWith(primary: Colors.orange))
+                ThemeData.light().colorScheme.copyWith(primary: Colors.orange))
         : ThemeData(
             tabBarTheme: TabBarTheme(labelColor: Colors.black),
-            brightness: Brightness.light,
+            // brightness: Brightness.light,
             fontFamily: GoogleFonts.montserrat().fontFamily,
             colorScheme:
                 ThemeData.dark().colorScheme.copyWith(primary: Colors.orange));
