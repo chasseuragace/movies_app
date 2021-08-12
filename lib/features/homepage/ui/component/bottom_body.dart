@@ -56,7 +56,7 @@ class HotNews extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: SectionHeaderWithAction(
-                              heading: 'Hot News', action: () {}),
+                              heading: 'Trending Today', action: () {}),
                         ),
                         Container(
                           height: 400,
@@ -70,8 +70,9 @@ class HotNews extends StatelessWidget {
                                       index * 3,
                                       min(manager.trendingData.results.length,
                                           index * 3 + 3));
-                              if (currentData.length < 3) return SizedBox();
 
+                              print(
+                                  "total : ${manager.trendingData.results.length} segment : $index , range : ${index * 3} to ${min(manager.trendingData.results.length, index * 3 + 3)}  selection Length : ${currentData.length} ");
                               return Container(
                                 width: 508,
                                 child: Row(
@@ -81,8 +82,12 @@ class HotNews extends StatelessWidget {
                                     Expanded(
                                       child: Column(
                                         children: [
-                                          NewsCard(currentData[1]),
-                                          NewsCard(currentData[2])
+                                          (currentData.length > 1)
+                                              ? NewsCard(currentData[1])
+                                              : Expanded(child: SizedBox()),
+                                          (currentData.length > 2)
+                                              ? NewsCard(currentData[2])
+                                              : Expanded(child: SizedBox()),
                                         ],
                                       ),
                                     )

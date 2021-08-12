@@ -15,6 +15,7 @@ class AppThemeConstants {
   static TextStyle get appFont => themeModeIsDark ? appFontWhite : appFontDark;
 
   static get appTheme {
+    return ThemeData.dark();
     return themeModeIsDark
         ? ThemeData(
             tabBarTheme: TabBarTheme(labelColor: Colors.white),

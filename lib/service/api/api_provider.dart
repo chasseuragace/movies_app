@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -26,33 +27,65 @@ class ApiProvider {
 
   dynamic getRequest({String url, Map<String, dynamic> headers}) async {
     http.StreamedResponse response;
+    var responseJson;
     try {
       var request =
           http.Request('GET', Uri.parse(url + "?api_key=$IMDB_TOKEN"));
       response = await request.send();
-    } on Exception catch (e) {
-      _handelErrors(e);
+      responseJson = await _response(response);
+    } on SocketException {
+      _showSnackBar(message: "No internet Connection");
+    } on FormatException {
+      _showSnackBar(message: "Got stupid response from API");
     }
-
-    if (response.statusCode == 200) {
-      //convert response string to actual data type most probably a Map<String,dynmaic> or List<dynamic>
-      var recievedData = await response.stream.bytesToString();
-      var decodedData = jsonDecode(recievedData);
-      return decodedData;
-    } else {
-      _handelErrors(response.statusCode);
-    }
+    return responseJson;
   }
 
-  _handelErrors(dynamic exception) {
-    if (exception is Exception) {
-      print(exception);
-      print('exception');
-      _showSnackBar(message: 'Error occured ${exception.runtimeType}');
-      return;
+  dynamic _response(http.StreamedResponse response) async {
+    var recievedData = await response.stream.bytesToString();
+    switch (response.statusCode) {
+      case 200:
+        var responseJson = json.decode(recievedData);
+        return responseJson;
+      case 400:
+        throw BadRequestException(recievedData);
+      case 401:
+      case 403:
+        throw UnauthorisedException(recievedData);
+      case 500:
+      default:
+        throw FetchDataException(
+            'Error occured while Communication with Server with StatusCode: ${response.statusCode}');
     }
-    if (exception is int) {}
   }
+}
+
+class CustomException implements Exception {
+  final _message;
+  final _prefix;
+
+  CustomException([this._message, this._prefix]);
+
+  String toString() {
+    return "$_prefix$_message";
+  }
+}
+
+class FetchDataException extends CustomException {
+  FetchDataException([String message])
+      : super(message, "Error During Communication: ");
+}
+
+class BadRequestException extends CustomException {
+  BadRequestException([message]) : super(message, "Invalid Request: ");
+}
+
+class UnauthorisedException extends CustomException {
+  UnauthorisedException([message]) : super(message, "Unauthorised: ");
+}
+
+class InvalidInputException extends CustomException {
+  InvalidInputException([String message]) : super(message, "Invalid Input: ");
 }
 
 enum DataFetchState { LOADING, LOADED, ERROR }
@@ -66,7 +99,7 @@ class TMDBManager {
   }
 
   static const String trending =
-      "https://api.themoviedb.org/3/trending/all/day";
+      "https://api.themoviedb.org/3/trending/all/week";
 //todo populars ko url change garne
   static const String popular = "https://api.themoviedb.org/3/trending/all/day";
   ApiProvider api = ApiProvider();
@@ -138,62 +171,65 @@ class TrendingResponse {
 }
 
 class Results {
+  String overview;
+  String releaseDate;
+  String title;
   bool adult;
   String backdropPath;
   List<int> genreIds;
-  int id;
   String originalLanguage;
   String originalTitle;
-  String overview;
   String posterPath;
-  String releaseDate;
-  String title;
-  bool video;
-  double voteAverage;
   int voteCount;
+  int id;
+  double voteAverage;
+  bool video;
   double popularity;
-  String firstAirDate;
+  String mediaType;
   String name;
+  String firstAirDate;
   List<String> originCountry;
   String originalName;
 
   Results(
-      {this.adult,
-      this.backdropPath,
-      this.genreIds,
-      this.id,
-      this.originalLanguage,
-      this.originalTitle,
-      this.overview,
-      this.posterPath,
+      {this.overview,
       this.releaseDate,
       this.title,
-      this.video,
-      this.voteAverage,
+      this.adult,
+      this.backdropPath,
+      this.genreIds,
+      this.originalLanguage,
+      this.originalTitle,
+      this.posterPath,
       this.voteCount,
+      this.id,
+      this.voteAverage,
+      this.video,
       this.popularity,
-      this.firstAirDate,
+      this.mediaType,
       this.name,
+      this.firstAirDate,
       this.originCountry,
       this.originalName});
 
   Results.fromJson(Map<String, dynamic> json) {
+    overview = json['overview'];
+    releaseDate = json['release_date'];
+    title = json['title'];
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'] == null ? null : json['genre_ids'].cast<int>();
-    id = json['id'];
     originalLanguage = json['original_language'];
     originalTitle = json['original_title'];
-    overview = json['overview'];
     posterPath = json['poster_path'];
-    releaseDate = json['release_date'];
-    title = json['title'];
-    video = json['video'];
-    voteAverage = json['vote_average'];
     voteCount = json['vote_count'];
+    id = json['id'];
+    voteAverage = json['vote_average'];
+    video = json['video'];
     popularity = json['popularity'];
-    firstAirDate = json['first_air_date'];
+    mediaType = json['media_type'];
     name = json['name'];
+    firstAirDate = json['first_air_date'];
     originCountry = json['origin_country'] == null
         ? null
         : json['origin_country'].cast<String>();
@@ -202,22 +238,23 @@ class Results {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['overview'] = this.overview;
+    data['release_date'] = this.releaseDate;
+    data['title'] = this.title;
     data['adult'] = this.adult;
     data['backdrop_path'] = this.backdropPath;
     data['genre_ids'] = this.genreIds;
-    data['id'] = this.id;
     data['original_language'] = this.originalLanguage;
     data['original_title'] = this.originalTitle;
-    data['overview'] = this.overview;
     data['poster_path'] = this.posterPath;
-    data['release_date'] = this.releaseDate;
-    data['title'] = this.title;
-    data['video'] = this.video;
-    data['vote_average'] = this.voteAverage;
     data['vote_count'] = this.voteCount;
+    data['id'] = this.id;
+    data['vote_average'] = this.voteAverage;
+    data['video'] = this.video;
     data['popularity'] = this.popularity;
-    data['first_air_date'] = this.firstAirDate;
+    data['media_type'] = this.mediaType;
     data['name'] = this.name;
+    data['first_air_date'] = this.firstAirDate;
     data['origin_country'] = this.originCountry;
     data['original_name'] = this.originalName;
     return data;
