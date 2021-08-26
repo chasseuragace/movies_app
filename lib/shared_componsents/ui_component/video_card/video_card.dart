@@ -33,6 +33,7 @@ class VideoCard extends StatelessWidget {
     );
   }
 }
+
 //todo select/modify 1
 class VideoCard2 extends StatelessWidget {
   final VideoCardModel singleCard;
@@ -66,6 +67,7 @@ class VideoCard2 extends StatelessWidget {
                     child: Opacity(
                       opacity: .8,
                       child: FloatingActionButton(
+                        heroTag: UniqueKey(),
                         onPressed: () {},
                         child: Icon(Icons.play_arrow),
                       ),
@@ -83,14 +85,15 @@ class VideoCard2 extends StatelessWidget {
             "Some Title",
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
-            style: AppThemeConstants.appFont.withSize(15).withWeight(weight:7),
+            style: AppThemeConstants.appFont.withSize(15).withWeight(weight: 7),
           ),
         ),
         Text(
           "Some Subtitle",
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: AppThemeConstants.appFont.copyWith(fontSize: 15, fontWeight: FontWeight.w500),
+          style: AppThemeConstants.appFont
+              .copyWith(fontSize: 15, fontWeight: FontWeight.w500),
         )
       ],
     );

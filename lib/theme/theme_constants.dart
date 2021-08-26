@@ -15,20 +15,27 @@ class AppThemeConstants {
   static TextStyle get appFont => themeModeIsDark ? appFontWhite : appFontDark;
 
   static get appTheme {
-    return ThemeData.dark();
     return themeModeIsDark
         ? ThemeData(
-            tabBarTheme: TabBarTheme(labelColor: Colors.white),
-            brightness: Brightness.dark,
+            indicatorColor: Colors.amber,
+            tabBarTheme: TabBarTheme(
+              labelColor: Colors.white,
+              indicatorSize: TabBarIndicatorSize.label,
+            ),
             fontFamily: GoogleFonts.montserrat().fontFamily,
-            colorScheme:
-                ThemeData.dark().colorScheme.copyWith(primary: Colors.orange))
+            colorScheme: ThemeData.dark().colorScheme.copyWith(
+                primary: Colors.orange,
+                secondary: Colors.orange[200],
+                secondaryVariant: Colors.green))
         : ThemeData(
+            indicatorColor: Colors.amber,
             tabBarTheme: TabBarTheme(labelColor: Colors.black),
             brightness: Brightness.light,
             fontFamily: GoogleFonts.montserrat().fontFamily,
-            colorScheme:
-                ThemeData.dark().colorScheme.copyWith(primary: Colors.orange));
+            colorScheme: ThemeData.light().colorScheme.copyWith(
+                primary: Colors.orange,
+                secondary: Colors.orange[200],
+                secondaryVariant: Colors.green));
   }
 }
 
