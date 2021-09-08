@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/service/api/api_provider.dart';
 
 class Logo extends StatelessWidget {
   const Logo({

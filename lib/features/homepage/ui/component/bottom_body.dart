@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:movies_app/features/homepage/ui/component/news_card.dart';
 import 'package:movies_app/service/api/api_provider.dart';
@@ -71,8 +70,8 @@ class HotNews extends StatelessWidget {
                                       min(manager.trendingData.results.length,
                                           index * 3 + 3));
 
-                              print(
-                                  "total : ${manager.trendingData.results.length} segment : $index , range : ${index * 3} to ${min(manager.trendingData.results.length, index * 3 + 3)}  selection Length : ${currentData.length} ");
+                              // print(
+                              //     "total : ${manager.trendingData.results.length} segment : $index , range : ${index * 3} to ${min(manager.trendingData.results.length, index * 3 + 3)}  selection Length : ${currentData.length} ");
                               return Container(
                                 width: 508,
                                 child: Row(
