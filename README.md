@@ -14,3 +14,21 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+
+
+1. Refractor
+    - single widget for sing task
+    - avoid repetative widgets
+    - grouping of related  widgets
+2. api provider => Refractor
+    TMDBManager
+    TrendingResponse
+    Results
+Extras : Change Notifier, Provider, ValueNotifier
+
+
+
+
+

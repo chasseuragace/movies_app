@@ -7,6 +7,39 @@ import 'package:movies_app/features/homepage/ui/homepage.dart';
 
 import '../../api_tokens.dart';
 
+class CustomException implements Exception {
+  final _message;
+  final _prefix;
+
+  CustomException([this._message, this._prefix]);
+
+  String toString() {
+    return "$_prefix$_message";
+  }
+}
+
+class FetchDataException extends CustomException {
+  FetchDataException([String message])
+      : super(message, "Error During Communication: ");
+}
+
+class BadRequestException extends CustomException {
+  BadRequestException([message]) : super(message, "Invalid Request: ");
+}
+
+class UnauthorisedException extends CustomException {
+  UnauthorisedException([message]) : super(message, "Unauthorised: ");
+}
+
+class InvalidInputException extends CustomException {
+  InvalidInputException([String message]) : super(message, "Invalid Input: ");
+}
+
+enum DataFetchState { LOADING, LOADED, ERROR }
+// manager class - api call initiate garxa
+// response lai object banauxa
+// ui lai data dinxa - automatic
+
 // http request calls
 class ApiProvider {
   _showSnackBar({String message}) {
@@ -60,39 +93,7 @@ class ApiProvider {
   }
 }
 
-class CustomException implements Exception {
-  final _message;
-  final _prefix;
-
-  CustomException([this._message, this._prefix]);
-
-  String toString() {
-    return "$_prefix$_message";
-  }
-}
-
-class FetchDataException extends CustomException {
-  FetchDataException([String message])
-      : super(message, "Error During Communication: ");
-}
-
-class BadRequestException extends CustomException {
-  BadRequestException([message]) : super(message, "Invalid Request: ");
-}
-
-class UnauthorisedException extends CustomException {
-  UnauthorisedException([message]) : super(message, "Unauthorised: ");
-}
-
-class InvalidInputException extends CustomException {
-  InvalidInputException([String message]) : super(message, "Invalid Input: ");
-}
-
-enum DataFetchState { LOADING, LOADED, ERROR }
-// manager class - api call initiate garxa
-// response lai object banauxa
-// ui lai data dinxa - automatic
-
+// below here refractor --------
 class TMDBManager {
   TMDBManager() {
     getTrending();
