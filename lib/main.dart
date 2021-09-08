@@ -15,7 +15,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       //using the the we defined earlier
       theme: AppThemeConstants.appTheme,
-      home: HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomePage(),
+        '/details': (context) => Detailspage(),
+      },
     );
   }
 }

@@ -1,9 +1,7 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:movies_app/features/homepage/ui/details_page/details_page.dart';
-import 'package:movies_app/service/api/api_provider.dart';
-import 'package:movies_app/theme/theme_constants.dart';
+import 'package:movies_app/features/homepage/ui/trendingPage/modal/trending_response.dart';
 
 class NewsCard extends StatelessWidget {
   final Results currentData;

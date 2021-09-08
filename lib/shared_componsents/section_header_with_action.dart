@@ -42,7 +42,6 @@ class SectionHeaderWithAction extends StatelessWidget {
               onTap: action,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                // todo refractor make a button out of it
                 child: Row(
                   children: [
                     Padding(

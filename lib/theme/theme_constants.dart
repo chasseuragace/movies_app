@@ -30,7 +30,7 @@ class AppThemeConstants {
         : ThemeData(
             indicatorColor: Colors.amber,
             tabBarTheme: TabBarTheme(labelColor: Colors.black),
-            brightness: Brightness.light,
+            // brightness: Brightness.light,
             fontFamily: GoogleFonts.montserrat().fontFamily,
             colorScheme: ThemeData.light().colorScheme.copyWith(
                 primary: Colors.orange,

@@ -1,15 +1,19 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:movies_app/service/api/api_provider.dart';
+import 'package:movies_app/features/homepage/ui/details_page/details_manager.dart';
+import 'package:movies_app/features/homepage/ui/trendingPage/modal/trending_response.dart';
 import 'package:movies_app/theme/theme_constants.dart';
 
 class Detailspage extends StatelessWidget {
   final Results currentData;
-  const Detailspage({Key key, this.currentData}) : super(key: key);
+  Detailspage({Key key, this.currentData}) : super(key: key);
+
+  final detailManager = DetailsManager();
 
   @override
   Widget build(BuildContext context) {
+    print(currentData);
     return Scaffold(
       body: Stack(
         children: [
@@ -82,7 +86,7 @@ class Detailspage extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.only(top: 8.0),
                                       child: Text(
-                                          "${currentData.releaseDate.substring(0, 4)}"),
+                                          "${currentData.releaseDate?.substring(0, 4) ?? 'unknown'}"),
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 18.0),
@@ -173,6 +177,41 @@ class Detailspage extends StatelessWidget {
                                           )
                                         ],
                                       ),
+                                    ),
+                                    SizedBox(
+                                      height: 100,
+                                      width: 100,
+                                      child: DefaultTabController(
+                                          length: 5,
+                                          child: SizedBox(
+                                            height: 100,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            child: Column(children: [
+                                              Row(
+                                                children: [
+                                                  TabBar(tabs: [
+                                                    Tab(
+                                                      text: 'Overview',
+                                                    ),
+                                                    Tab(
+                                                      text: 'Episodes',
+                                                    ),
+                                                    Tab(
+                                                      text: 'Details',
+                                                    ),
+                                                    Tab(
+                                                      text: 'Review',
+                                                    ),
+                                                    Tab(
+                                                      text: 'Discussion',
+                                                    ),
+                                                  ])
+                                                ],
+                                              )
+                                            ]),
+                                          )),
                                     )
                                   ],
                                 ),
