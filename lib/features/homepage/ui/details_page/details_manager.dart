@@ -3,7 +3,9 @@ import 'package:movies_app/features/homepage/ui/details_page/modal/details_respo
 import 'package:movies_app/service/api/api_provider.dart';
 
 class DetailsManager {
-  DetailsManager() {
+  final int id;
+  final bool isTv;
+  DetailsManager({this.id, this.isTv = false}) {
     getDetails();
   }
 
@@ -12,7 +14,7 @@ class DetailsManager {
 
   ApiProvider api = ApiProvider();
   String error;
-  String detail = 'https://api.themoviedb.org/3/movie/337404';
+  String get  detail => 'https://api.themoviedb.org/3/movie/$id';
   String additionalParameter = '&append_to_response=credits,reviews';
   DetailsResponse detailsData;
 

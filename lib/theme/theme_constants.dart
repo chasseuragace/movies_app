@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppThemeConstants {
-  static bool themeModeIsDark = false;
+  static bool themeModeIsDark = true;
 
   static TextStyle appFontDark =
       GoogleFonts.montserrat().copyWith(color: Colors.black);
