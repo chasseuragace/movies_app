@@ -1,7 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+
 import 'package:movies_app/features/homepage/ui/details_page/details_manager.dart';
+import 'package:movies_app/features/homepage/ui/details_page/modal/details_response.dart'
+    as details;
 import 'package:movies_app/features/homepage/ui/trendingPage/modal/trending_response.dart';
 import 'package:movies_app/service/api/api_provider.dart';
 import 'package:movies_app/theme/theme_constants.dart';
@@ -24,10 +27,10 @@ class _DetailspageState extends State<Detailspage> {
 
   @override
   Widget build(BuildContext context) {
-    print("DATA IS" + widget.currentData.toJson().toString());
     return Scaffold(
       body: Stack(
         children: [
+          //todo : refractor as Background Image
           Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
@@ -38,6 +41,7 @@ class _DetailspageState extends State<Detailspage> {
                     ),
                     fit: BoxFit.cover)),
           ),
+          //todo : refractor as BackgroundBlur
           ClipRRect(
             child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 4.6, sigmaY: 4.6),
@@ -46,6 +50,7 @@ class _DetailspageState extends State<Detailspage> {
                   width: MediaQuery.of(context).size.width,
                   child: Stack(
                     children: [
+                      //todo : refractor as CustomBackButton
                       Positioned(
                         left: 20,
                         top: kToolbarHeight,
@@ -64,6 +69,7 @@ class _DetailspageState extends State<Detailspage> {
                               Navigator.of(context).pop();
                             }),
                       ),
+
                       Positioned(
                           bottom: 0,
                           height: MediaQuery.of(context).size.height - 300 - 55,
@@ -75,11 +81,11 @@ class _DetailspageState extends State<Detailspage> {
                             child: Material(
                               borderRadius: BorderRadius.circular(12),
                               child: Container(
-                                height: MediaQuery.of(context).size.height -
-                                    300 -
-                                    55,
+                                height:
+                                    MediaQuery.of(context).size.height - 300,
                                 width: 200,
                                 child: SingleChildScrollView(
+                                  //todo : refractor as DetailsBody
                                   child: Column(
                                     children: [
                                       SizedBox(height: 60),
@@ -196,7 +202,7 @@ class _DetailspageState extends State<Detailspage> {
                                         ),
                                       ),
                                       SizedBox(
-                                        height: 500,
+                                        height: 550,
                                         child: DefaultTabController(
                                             length: 5,
                                             child: SizedBox(
@@ -293,16 +299,7 @@ class _DetailspageState extends State<Detailspage> {
                                                                                                         2,
                                                                                                         (index) => Padding(
                                                                                                           padding: const EdgeInsets.all(8.0),
-                                                                                                          child: Container(
-                                                                                                              height: 120,
-                                                                                                              color: Colors.red,
-                                                                                                              child: ListView.builder(
-                                                                                                                  scrollDirection: Axis.horizontal,
-                                                                                                                  itemCount: 4,
-                                                                                                                  itemBuilder: (c, i) => Padding(
-                                                                                                                        padding: const EdgeInsets.all(8.0),
-                                                                                                                        child: Container(width: 128, color: Colors.orange),
-                                                                                                                      ))),
+                                                                                                          child: Container(height: 120, child: CastCrewList(detailManager: detailManager, isCrew: index == 1)),
                                                                                                         ),
                                                                                                       )),
                                                                                                 )
@@ -323,6 +320,7 @@ class _DetailspageState extends State<Detailspage> {
                               ),
                             ),
                           )),
+                      // //todo : refractor as CenterImage
                       Positioned(
                           top: 100,
                           height: 300,
@@ -356,5 +354,45 @@ class _DetailspageState extends State<Detailspage> {
         ],
       ),
     );
+  }
+}
+
+class CastCrewList extends StatelessWidget {
+  final isCrew;
+  const CastCrewList({
+    Key key,
+    @required this.detailManager,
+    this.isCrew = false,
+  }) : super(key: key);
+
+  final DetailsManager detailManager;
+
+  @override
+  Widget build(BuildContext context) {
+    final crews = detailManager.getCrew;
+    final cast = detailManager.getCast;
+    return ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: (isCrew ? (crews) : (cast)).length,
+        itemBuilder: (c, i) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: 128,
+                child: Column(
+                  children: [
+                    Expanded(
+                        child: Image.network(
+                      "https://image.tmdb.org/t/p/w500/${(isCrew ? crews.elementAt(i).profilePath : cast.elementAt(i).profilePath)}",
+                    )),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text((isCrew
+                          ? crews.elementAt(i).name
+                          : cast.elementAt(i).name)),
+                    )
+                  ],
+                ),
+              ),
+            ));
   }
 }
