@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:movies_app/features/homepage/ui/component/background_image.dart';
 
 import 'package:movies_app/features/homepage/ui/details_page/details_manager.dart';
 import 'package:movies_app/features/homepage/ui/details_page/modal/details_response.dart'
@@ -31,16 +32,7 @@ class _DetailspageState extends State<Detailspage> {
       body: Stack(
         children: [
           //todo : refractor as Background Image
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(
-                      'https://image.tmdb.org/t/p/w500/${widget.currentData.backdropPath}',
-                    ),
-                    fit: BoxFit.cover)),
-          ),
+          BackgroundImage('https://image.tmdb.org/t/p/w500/${widget.currentData.backdropPath}'),
           //todo : refractor as BackgroundBlur
           ClipRRect(
             child: BackdropFilter(
@@ -86,267 +78,13 @@ class _DetailspageState extends State<Detailspage> {
                                 width: 200,
                                 child: SingleChildScrollView(
                                   //todo : refractor as DetailsBody
-                                  child: Column(
-                                    children: [
-                                      SizedBox(height: 60),
-                                      Text(
-                                        widget.currentData.title ??
-                                            widget.currentData.originalTitle ??
-                                            widget.currentData.name ??
-                                            widget.currentData.originalName ??
-                                            "NO Data",
-                                        style: AppThemeConstants.appFont
-                                            .withSize(18)
-                                            .withWeight(),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 8.0),
-                                        child: Text(
-                                            "${widget.currentData.releaseDate?.substring(0, 4) ?? 'unknown'}"),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 18.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Column(
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Icon(
-                                                      Icons.star,
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .primary,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 3.0),
-                                                      child: Text(
-                                                          "${widget.currentData.voteAverage}",
-                                                          style:
-                                                              AppThemeConstants
-                                                                  .appFontAccent
-                                                                  .withSize(18)
-                                                                  .withWeight()),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Text(
-                                                    "${widget.currentData.voteCount}")
-                                              ],
-                                            ),
-                                            Column(
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Icon(
-                                                      Icons.signal_cellular_alt,
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .secondaryVariant,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 3.0),
-                                                      child: Text(
-                                                          "${widget.currentData.popularity}",
-                                                          style: AppThemeConstants
-                                                              .appFontAccent
-                                                              .copyWith(
-                                                                  color: Colors
-                                                                      .grey)
-                                                              .withSize(18)
-                                                              .withWeight()),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Text("popularity")
-                                              ],
-                                            ),
-                                            Column(
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Icon(
-                                                      Icons.language_outlined,
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .secondary,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 3.0),
-                                                      child: Text(
-                                                          "${widget.currentData.originalLanguage.toUpperCase()}",
-                                                          style:
-                                                              AppThemeConstants
-                                                                  .appFont
-                                                                  .withSize(18)
-                                                                  .withWeight()),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Text("language")
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 550,
-                                        child: DefaultTabController(
-                                            length: 5,
-                                            child: SizedBox(
-                                              /// height: 700,
-                                              width: MediaQuery.of(context)
-                                                  .size
-                                                  .width,
-                                              child: Column(children: [
-                                                TabBar(
-                                                    isScrollable: true,
-                                                    tabs: [
-                                                      Tab(
-                                                        text: 'Overview',
-                                                      ),
-                                                      Tab(
-                                                        text: 'Episodes',
-                                                      ),
-                                                      Tab(
-                                                        text: 'Details',
-                                                      ),
-                                                      Tab(
-                                                        text: 'Review',
-                                                      ),
-                                                      Tab(
-                                                        text: 'Discussion',
-                                                      ),
-                                                    ]),
-                                                Expanded(
-                                                    child: TabBarView(
-                                                        children: List.generate(
-                                                            5,
-                                                            (index) => Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                              .all(
-                                                                          8.0),
-                                                                  child: Column(
-                                                                      crossAxisAlignment:
-                                                                          CrossAxisAlignment
-                                                                              .start,
-                                                                      children: [
-                                                                        Text(
-                                                                            "Storyline",
-                                                                            style:
-                                                                                TextStyle().withWeight(weight: 9)),
-                                                                        Padding(
-                                                                          padding:
-                                                                              const EdgeInsets.only(top: 8.0),
-                                                                          child: Text(widget
-                                                                              .currentData
-                                                                              .overview),
-                                                                        ),
-                                                                        ValueListenableBuilder(
-                                                                            valueListenable: detailManager
-                                                                                .detailsFetchState,
-                                                                            builder: (context,
-                                                                                value,
-                                                                                child) {
-                                                                              return value == DataFetchState.LOADED
-                                                                                  ? Column(
-                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                      children: [
-                                                                                        Wrap(
-                                                                                          children: [
-                                                                                            ...List.generate(
-                                                                                                detailManager.detailsData.genres.length,
-                                                                                                (index) => Padding(
-                                                                                                      padding: const EdgeInsets.only(right: 8.0, top: 8.0),
-                                                                                                      child: Text(detailManager.detailsData.genres[index].name + "${index == detailManager.detailsData.genres.length - 1 ? "" : "  /"}"),
-                                                                                                    ))
-                                                                                          ],
-                                                                                        ),
-                                                                                        DefaultTabController(
-                                                                                            length: 2,
-                                                                                            child: Column(
-                                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                              children: [
-                                                                                                SizedBox(
-                                                                                                    width: 140,
-                                                                                                    child: TabBar(
-                                                                                                      tabs: ["Cast", "Crew"]
-                                                                                                          .map((e) => Tab(
-                                                                                                                child: Text(e),
-                                                                                                              ))
-                                                                                                          .toList(),
-                                                                                                      labelPadding: EdgeInsets.zero,
-                                                                                                      indicatorSize: TabBarIndicatorSize.tab,
-                                                                                                    )),
-                                                                                                SizedBox(
-                                                                                                  height: 200,
-                                                                                                  child: TabBarView(
-                                                                                                      physics: NeverScrollableScrollPhysics(),
-                                                                                                      children: List.generate(
-                                                                                                        2,
-                                                                                                        (index) => Padding(
-                                                                                                          padding: const EdgeInsets.all(8.0),
-                                                                                                          child: Container(height: 120, child: CastCrewList(detailManager: detailManager, isCrew: index == 1)),
-                                                                                                        ),
-                                                                                                      )),
-                                                                                                )
-                                                                                              ],
-                                                                                            ))
-                                                                                      ],
-                                                                                    )
-                                                                                  : Text("Loading");
-                                                                            })
-                                                                      ]),
-                                                                )))),
-                                              ]),
-                                            )),
-                                      ),
-                                    ],
-                                  ),
+                                 DetailsBody(),
                                 ),
                               ),
                             ),
                           )),
                       // //todo : refractor as CenterImage
-                      Positioned(
-                          top: 100,
-                          height: 300,
-                          left: 0,
-                          right: 0,
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Hero(
-                              tag: "details-${widget.currentData.id}",
-                              child: Material(
-                                borderRadius: BorderRadius.circular(12),
-                                elevation: 6,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(12),
-                                  child: Container(
-                                      width: 200,
-                                      height: 300,
-                                      color: Colors.red,
-                                      child: Image.network(
-                                        'https://image.tmdb.org/t/p/w500/${widget.currentData.backdropPath}',
-                                        fit: BoxFit.cover,
-                                      )),
-                                ),
-                              ),
-                            ),
-                          )),
+                      CenterImage(tag:"details-${widget.currentData.id}",url: 'https://image.tmdb.org/t/p/w500/${widget.currentData.backdropPath}'),
                     ],
                   ),
                 )),
