@@ -2,13 +2,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:movies_app/features/homepage/ui/component/background_image.dart';
+import 'package:movies_app/features/homepage/ui/component/center_image.dart';
+import 'package:movies_app/features/homepage/ui/details_page/details_body.dart';
 
 import 'package:movies_app/features/homepage/ui/details_page/details_manager.dart';
-import 'package:movies_app/features/homepage/ui/details_page/modal/details_response.dart'
-    as details;
 import 'package:movies_app/features/homepage/ui/trendingPage/modal/trending_response.dart';
-import 'package:movies_app/service/api/api_provider.dart';
-import 'package:movies_app/theme/theme_constants.dart';
 
 class Detailspage extends StatefulWidget {
   final Results currentData;
